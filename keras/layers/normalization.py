@@ -93,7 +93,7 @@ class BatchNormalization(Layer):
         if axis == -1 and K.image_data_format() == 'channels_first' and K.backend() == 'mxnet':
             self.axis = 1
         else:
-            self.axis = axis
+            self.axis = axis if isinstance(axis, int) else axis[-1]
 
     def build(self, input_shape):
         dim = input_shape[self.axis]
